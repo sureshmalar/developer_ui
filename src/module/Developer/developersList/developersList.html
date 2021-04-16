@@ -1,0 +1,58 @@
+<div class="container-fluid login gridWidthFull px-0 pt-4">
+    <div class="p-grid gridWidthFull">
+      <div class="p-md-offset-1 p-lg-offset-1 p-lg-10 p-md-10 p-col-12">
+        <div class="p-grid my-4">
+          <span class="txtClass">Total Developers: {{developers.length}}</span>
+          <Button v-if="selectedData.length != 0" type="button" class="ml-4" @click="deleteMultiple()" style="float: right !important;">Delete {{selectedData.length}} Records</Button>
+        </div>
+        <div class="p-grid my-4">
+          <div class="p-col-12">
+            <DataTable ref="dt" :value="developers" :lazy="true" :selection.sync="selectedData" :paginator="true"
+              class="p-datatable-customers" :rows="10" dataKey="id" :rowHover="true" :totalRecords="developers.length">
+              <Column selectionMode="multiple" headerStyle="width: 3rem" :exportable="false">
+                <!-- <template #body="slotProps" @click="deleteMultiple(slotProps.data.id)"> -->
+            </template>
+
+              </Column>
+              <Column header="Name" :sortable="true">
+                <template #body="slotProps">
+                  <span v-if="slotProps.data.first_name != undefined && slotProps.data.first_name != null">{{slotProps.data.first_name}}</span>
+                </template>
+              </Column>
+              <Column header="Email Id" :sortable="true">
+                <template #body="slotProps">
+                  <span v-if="slotProps.data.email != undefined && slotProps.data.email != null">
+                    {{slotProps.data.email}}</span>
+                </template>
+              </Column>
+              <Column header="Phone" :sortable="true">
+                <template #body="slotProps">
+                  <span v-if="slotProps.data.phone_number != undefined && slotProps.data.phone_number != null">
+                    {{slotProps.data.phone_number}}</span>
+                </template>
+              </Column>
+              <Column header="Address" :sortable="true">
+                <template #body="slotProps">
+                  <span v-if="slotProps.data.address != undefined && slotProps.data.address != null">
+                    {{slotProps.data.address}}</span>
+                </template>
+              </Column>
+              <Column header="Action">
+                <template #body="slotProps">
+                  <span><i class="pi pi-pencil cursor" @click="editDeveloper(slotProps.data.id)" ></i></span>
+                  <span class="pl-4 cursor"><i class="pi pi-trash" @click="deleteDeveloper(slotProps.data.id)"></i></span>
+                </template>
+              </Column>
+            </DataTable>
+      
+          </div>
+        </div>
+      </div>
+      <div class="p-lg-1 p-md-1">
+      </div>
+      
+    </div>
+    
+  </div>
+      
+  
